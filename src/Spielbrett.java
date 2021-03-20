@@ -10,6 +10,10 @@ public class Spielbrett {
         this.brett = brett;
     }
 
+    public char getGameOver() {
+        return gameOver;
+    }
+
     /***
      * Constructor for Spielbrett
      * @param width
@@ -23,6 +27,7 @@ public class Spielbrett {
                 brett[i][j] = '.';
             }
         }
+        paintMe();
     }
 
     /***
@@ -132,17 +137,18 @@ public class Spielbrett {
         }
         System.out.println();
 
-        for (int i = height; i >= 0; i--) {
+        for (int i = height - 1; i >= 0; i--) {
             for (int j = 0; j < width; j++) {
-                System.out.print(brett[i][j]);
+                System.out.print(brett[j][i]);
             }
             System.out.println();
         }
         for (int i = 0; i < getBrett().length; i++) {
             System.out.print(i + 1);
         }
+        System.out.println();
         if (gameOver != '.') {
-            System.out.println("Player " + "has won" );
+            System.out.println("Player " + gameOver + " has won" );
         }
     }
 }
