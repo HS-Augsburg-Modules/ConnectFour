@@ -1,0 +1,13 @@
+<application>
+  <component name="FileTypeManager" version="18">
+    <extensionMap>
+      <mapping pattern="Challenge" type="AUTO_DETECTED" />
+      <mapping pattern="Aufgabe3b" type="JAVA" />
+      <mapping pattern="Aufgabe3a" type="JAVA" />
+      <mapping ext="gradle.kts" type="Kotlin" />
+      <mapping ext="main.kts" type="Kotlin" />
+      <removed_mapping ext="apk" approved="true" type="ARCHIVE" />
+      <removed_mapping ext="psd" approved="true" type="Image" />
+    </extensionMap>
+  </component>
+</application>
