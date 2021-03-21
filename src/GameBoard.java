@@ -148,7 +148,7 @@ public class GameBoard {
         }
         System.out.println();
         if (gameOver != '.') {
-            System.out.println("The player with the sign " + gameOver + "wins. Congratulations!");
+            System.out.println("The player with the sign " + gameOver + " wins. Congratulations!");
         }
     }
 }
