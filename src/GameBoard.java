@@ -1,33 +1,33 @@
-public class Spielbrett {
-    private char[][] brett;
+public class GameBoard {
+    private char[][] board;
     private char gameOver = '.';
 
-    public char[][] getBrett() {
-        return brett;
+    /***
+     * Constructor for GameBoard
+     * @param width
+     * @param height
+     * initialize with '.' for whole GameBoard
+     */
+    public GameBoard(int width, int height) {
+        board = new char[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                board[i][j] = '.';
+            }
+        }
+        printGame();
     }
 
-    public void setBrett(char[][] brett) {
-        this.brett = brett;
+    public char[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(char[][] board) {
+        this.board = board;
     }
 
     public char getGameOver() {
         return gameOver;
-    }
-
-    /***
-     * Constructor for Spielbrett
-     * @param width
-     * @param height
-     * initialize with '.' for whole Spielbrett
-     */
-    public Spielbrett(int width, int height) {
-        brett = new char[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                brett[i][j] = '.';
-            }
-        }
-        paintMe();
     }
 
     /***
@@ -39,22 +39,22 @@ public class Spielbrett {
      * @return
      */
     private char checkWin(int width, int height) {
-        char player = brett[width][height];
+        char player = board[width][height];
 
         int wCounter = 1;
         int hCounter = 1;
         int lbTrt = 1;
         int rbTlt = 1;
 
-        for (int i = width + 1; i < getBrett().length; i++) {
-            if (getBrett()[i][height] == player) {
+        for (int i = width + 1; i < getBoard().length; i++) {
+            if (getBoard()[i][height] == player) {
                 wCounter++;
             } else {
                 break;
             }
         }
         for (int i = width - 1; i >= 0; i--) {
-            if (getBrett()[i][height] == player) {
+            if (getBoard()[i][height] == player) {
                 wCounter++;
             } else {
                 break;
@@ -64,7 +64,7 @@ public class Spielbrett {
             return player;
         }
         for (int i = height - 1; i >= 0; i--) {
-            if (getBrett()[width][i] == player) {
+            if (getBoard()[width][i] == player) {
                 hCounter++;
             } else {
                 break;
@@ -84,25 +84,25 @@ public class Spielbrett {
             boolean f3 = true;
             boolean f4 = true;
 
-            if (currWidthP < getBrett().length) {
-                if (f1 && currHeightP < getBrett()[0].length && getBrett()[currWidthP][currHeightP] == player) {
+            if (currWidthP < getBoard().length) {
+                if (f1 && currHeightP < getBoard()[0].length && getBoard()[currWidthP][currHeightP] == player) {
                     lbTrt++;
                 } else {
                     f1 = false;
                 }
-                if (f2 && currHeightN >= 0 && getBrett()[currWidthP][currHeightN] == player) {
+                if (f2 && currHeightN >= 0 && getBoard()[currWidthP][currHeightN] == player) {
                     rbTlt++;
                 } else {
                     f2 = false;
                 }
             }
             if (currWidthN >= 0) {
-                if (f3 && currHeightN >= 0 && getBrett()[currWidthN][currHeightN] == player) {
+                if (f3 && currHeightN >= 0 && getBoard()[currWidthN][currHeightN] == player) {
                     lbTrt++;
                 } else {
                     f3 = false;
                 }
-                if (f4 && currHeightP < getBrett()[0].length && getBrett()[currWidthN][currHeightP] == player) {
+                if (f4 && currHeightP < getBoard()[0].length && getBoard()[currWidthN][currHeightP] == player) {
                     rbTlt++;
                 } else {
                     f4 = false;
@@ -117,38 +117,38 @@ public class Spielbrett {
     }
 
     public boolean placeStone(int place, char player) {
-        for (int i = 0; i < getBrett()[place].length; i++) {
-            if (getBrett()[place][i] == '.') {
-                getBrett()[place][i] = player;
+        for (int i = 0; i < getBoard()[place].length; i++) {
+            if (getBoard()[place][i] == '.') {
+                getBoard()[place][i] = player;
                 gameOver = checkWin(place, i);
-                paintMe();
+                printGame();
                 return true;
             }
         }
         return false;
     }
 
-    private void paintMe() {
-        int height = getBrett()[0].length;
-        int width = getBrett().length;
+    private void printGame() {
+        int height = getBoard()[0].length;
+        int width = getBoard().length;
 
-        for (int i = 0; i < getBrett().length; i++) {
+        for (int i = 0; i < getBoard().length; i++) {
             System.out.print(i + 1);
         }
         System.out.println();
 
         for (int i = height - 1; i >= 0; i--) {
             for (int j = 0; j < width; j++) {
-                System.out.print(brett[j][i]);
+                System.out.print(board[j][i]);
             }
             System.out.println();
         }
-        for (int i = 0; i < getBrett().length; i++) {
+        for (int i = 0; i < getBoard().length; i++) {
             System.out.print(i + 1);
         }
         System.out.println();
         if (gameOver != '.') {
-            System.out.println("Player " + gameOver + " has won" );
+            System.out.println("The player with the sign " + gameOver + "wins. Congratulations!");
         }
     }
 }

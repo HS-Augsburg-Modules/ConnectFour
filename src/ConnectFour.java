@@ -5,18 +5,21 @@
 
 import java.io.IOException;
 
-public class VierGewinnt {
+public class ConnectFour {
 
     static final char player1 = 'X';
     static final char player2 = 'O';
     static boolean isPlayer1Turn = true;
 
+    public ConnectFour() {
+    }
+
     public static void main(String[] args) {
 
-        System.out.println("Welcome to the best command line implementation of \"Connect Four\"!");
+        System.out.println("Welcome to Connect Four's best command line implementation!");
 
-        Spielbrett brett = new Spielbrett(8, 8);
-        while (brett.getGameOver() == '.') {
+        GameBoard board = new GameBoard(8, 8);
+        while (board.getGameOver() == '.') {
             try {
                 int width = System.in.read();
                 if (width == 10) {
@@ -25,19 +28,16 @@ public class VierGewinnt {
                 if (width < 49 || width > 57) {
                     throw new ClassCastException();
                 }
-                if (brett.placeStone(width - 49, isPlayer1Turn ? player1 : player2)) {
+                if (board.placeStone(width - 49, isPlayer1Turn ? player1 : player2)) {
                     isPlayer1Turn = !isPlayer1Turn;
                 } else {
-                    System.out.println("Hast du das Spiel eigentlich schon mal gespielt du Mongo?!");
+                    System.out.println("Did you even play this game once?");
                 }
             } catch (ClassCastException e1) {
-                System.out.println("Hey du verrückter dummer Affe gib eine Zahl ein und keinen Buchstaben!");
+                System.out.println("Only the numbers shown on the game board are allowed!");
             } catch (IOException e2) {
-                System.out.println("Was machst du für eine verrückte Scheiße?");
+                System.out.println("The System threw an exception based on your input. What the heck are you doing?");
             }
         }
-    }
-
-    public VierGewinnt() {
     }
 }
