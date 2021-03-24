@@ -27,11 +27,11 @@ public class ConnectFour {
                 	nextStep = true;
                     continue;
                 }
-                if (width < 49 || width > 57) {
-                    throw new ClassCastException();
-                }
                 if (!nextStep) {
                 	continue;
+                }
+                if (width < 49 || width > 57) {
+                    throw new ClassCastException();
                 }
                 if (board.placeStone(width - 49, isPlayer1Turn ? player1 : player2)) {
                     isPlayer1Turn = !isPlayer1Turn;
