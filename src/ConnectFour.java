@@ -19,17 +19,23 @@ public class ConnectFour {
         System.out.println("Welcome to Connect Four's best command line implementation!");
 
         GameBoard board = new GameBoard(8, 8);
+        boolean nextStep = true;
         while (board.getGameOver() == '.') {
             try {
                 int width = System.in.read();
                 if (width < 20) {
+                	nextStep = true;
                     continue;
                 }
                 if (width < 49 || width > 57) {
                     throw new ClassCastException();
                 }
+                if (!nextStep) {
+                	continue;
+                }
                 if (board.placeStone(width - 49, isPlayer1Turn ? player1 : player2)) {
                     isPlayer1Turn = !isPlayer1Turn;
+                    nextStep=false;
                 } else {
                     System.out.println("Did you even play this game once?");
                 }
